@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Fieldbook — Internship Tracker</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- ===================== AUTH VIEW ===================== -->
+  <section id="auth-view" class="auth-view">
+    <div class="auth-card">
+      <div class="brand">
+        <span class="brand-mark">✎</span>
+        <h1>Fieldbook</h1>
+      </div>
+      <p class="brand-tagline">Your internship search, kept like a logbook.</p>
+
+      <div class="tabs">
+        <button class="tab-btn active" data-tab="login">Log in</button>
+        <button class="tab-btn" data-tab="signup">Sign up</button>
+      </div>
+
+      <form id="login-form" class="auth-form active">
+        <label>Email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>Password
+          <input type="password" name="password" required autocomplete="current-password" />
+        </label>
+        <button type="submit" class="btn-primary">Log in</button>
+        <p class="form-msg" id="login-msg"></p>
+      </form>
+
+      <form id="signup-form" class="auth-form">
+        <label>Name
+          <input type="text" name="name" required autocomplete="name" />
+        </label>
+        <label>Email
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>Password
+          <input type="password" name="password" required minlength="6" autocomplete="new-password" />
+        </label>
+        <button type="submit" class="btn-primary">Create account</button>
+        <p class="form-msg" id="signup-msg"></p>
+      </form>
+    </div>
+  </section>
+
+  <!-- ===================== APP VIEW ===================== -->
+  <section id="app-view" class="app-view hidden">
+    <aside class="spine">
+      <div class="brand">
+        <span class="brand-mark">✎</span>
+        <h1>Fieldbook</h1>
+      </div>
+      <p class="spine-sub">Internship logbook</p>
+
+      <div class="spine-stats" id="spine-stats"></div>
+
+      <button class="btn-primary btn-block" id="new-entry-btn">+ New entry</button>
+
+      <button class="btn-ghost btn-block" id="logout-btn">Log out</button>
+    </aside>
+
+    <main class="ledger">
+      <header class="ledger-header">
+        <h2>Application log</h2>
+        <p id="entry-count" class="muted"></p>
+      </header>
+
+      <div class="board" id="board">
+        <!-- columns injected by JS -->
+      </div>
+    </main>
+  </section>
+
+  <!-- ===================== ENTRY MODAL ===================== -->
+  <div id="entry-modal" class="modal-backdrop hidden">
+    <div class="modal">
+      <div class="modal-head">
+        <h3 id="modal-title">New entry</h3>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <form id="entry-form">
+        <input type="hidden" name="id" />
+        <div class="grid-2">
+          <label>Company *
+            <input type="text" name="companyName" required />
+          </label>
+          <label>Role *
+            <input type="text" name="role" required />
+          </label>
+        </div>
+        <div class="grid-2">
+          <label>Status
+            <select name="status">
+              <option>Applied</option>
+              <option>Interview</option>
+              <option>Offer</option>
+              <option>Rejected</option>
+            </select>
+          </label>
+          <label>Work mode
+            <select name="workMode">
+              <option value="">—</option>
+              <option>Remote</option>
+              <option>Hybrid</option>
+              <option>On-site</option>
+            </select>
+          </label>
+        </div>
+        <div class="grid-2">
+          <label>Location
+            <input type="text" name="location" placeholder="City, Country" />
+          </label>
+          <label>Applied date
+            <input type="date" name="appliedDate" />
+          </label>
+        </div>
+        <div class="grid-2">
+          <label>Salary / stipend
+            <input type="number" name="salary" placeholder="e.g. 20000" />
+          </label>
+          <label>Job link
+            <input type="url" name="jobLink" placeholder="https://..." />
+          </label>
+        </div>
+        <label>Notes
+          <textarea name="notes" rows="3" placeholder="Referral, recruiter contact, interview prep..."></textarea>
+        </label>
+        <div class="modal-actions">
+          <button type="button" class="btn-danger hidden" id="delete-entry-btn">Delete</button>
+          <div class="spacer"></div>
+          <button type="button" class="btn-ghost" id="cancel-entry-btn">Cancel</button>
+          <button type="submit" class="btn-primary">Save entry</button>
+        </div>
+        <p class="form-msg" id="entry-msg"></p>
+      </form>
+    </div>
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
